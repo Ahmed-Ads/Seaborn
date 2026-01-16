@@ -1,0 +1,959 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{ragged2e} 
+\usepackage{fancyhdr} 
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage[left=4cm, right=4cm, top=3cm, bottom=3cm]{geometry}
+\usepackage[colorlinks=true, urlcolor=blue]{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{datetime}
+
+
+
+% Set up code listing style
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!40!black},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!5},
+    tabsize=4,
+    literate={*}{{\char42}}1
+             {-}{{\char45}}1
+}
+
+
+% Set up fancy header
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyhead[C]{Ahmed Mohamed Ads\\} 
+\fancyhead[L]{Faculty of Engineering}
+\fancyhead[R]{Mansoura University} 
+
+\title{Seaborn Summary}
+\author{Ahmed Mohamed Ads} 
+\date{\formatdate{29}{4}{2025} \\
+1 Dhu al-Qi‘dah 1446 AH
+}
+
+\parindent0pt
+\begin{document}
+\maketitle
+
+% Title Section
+\section*{\huge Seaborn}
+
+\subsection*{seaborn} 
+A Python library used for enhancing the style of different graphs.
+
+\subsubsection*{Seaborn updates matplotlib's rc parameters to improve aesthetics}
+
+\begin{lstlisting}[language=Python]
+import seaborn as sns
+sns.set() 
+plt.plot(x, y)
+sns.set_style("white")
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|import seaborn as sns|: importing the seaborn library to use it with the name sns.
+\item \lstinline|sns.set()|: function for setting the seaborn default style on the plot by updating the matplotlib's rc parameters, and see \href{https://seaborn.pydata.org/generated/seaborn.set_theme.html#seaborn.set_theme}{Seaborn set documentation} for more details.
+\item \lstinline|plt.plot()|: plotting the data to watch the difference.
+\item \lstinline|sns.set_style("white")|: for making a specific background style, here a plain white background.
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\caption{Diffrences between plots}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure1.PNG"}
+\caption{Original plot}
+\end{subfigure}
+\hfill
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure2.PNG"}
+\caption{After using sns.set()}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure3.PNG"}
+\caption{After using sns.set\_style()}
+\end{subfigure}
+\end{figure}
+
+\subsection*{Versions}
+
+\begin{lstlisting}[language=Python]
+import matplotlib        #importing matplotlib library
+matplotlib.__version__   #Getting the current version of matplotlib
+import seaborn as sns    #importing seaborn library as sns
+sns.__version__          #Getting the current version of seaborn
+\end{lstlisting}
+
+\subsection*{Seaborn with pandas} 
+
+\subsubsection*{Let Seaborn group, aggregate, and plot your pandas dataframes}
+
+
+\begin{lstlisting}[language=Python]
+cars = sns.load_dataset('mpg')
+type(cars)
+cars.dropna(inplace=True)
+cars.shape
+cars.head()
+sns.relplot(x='model_year', y='mpg', col='origin', hue='cylinders', data=cars)
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|cars = sns.load\_dataset('mpg')|: loading the built-in MPG dataset that will be plotted.
+\item \lstinline|type(cars)|: getting the type of the object cars output : \texttt{pandas.core.frame.DataFrame}
+\item \lstinline|cars.shape|: plotting the data to watch the difference.
+\item \lstinline|cars.dropna(inplace=True)|: removing all the rows in the dataset that contain missing values (NaN).
+\item \lstinline|cars.head()|: getting the first five rows in the data set.
+\item \lstinline|sns.relplot(x='model_year', y='mpg', col='origin', hue='cylinders', data=cars)|: for creating a plot (scatter plot) and for the full signature visit \href{https://seaborn.pydata.org/generated/seaborn.relplot.html}{Seaborn replot documentation}. 
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\caption{Fuel efficiency (mpg) over model year, separated by car origin plot}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure4.PNG"}
+\end{figure}
+
+\subsection*{Seaborn: KDEplot} 
+
+\subsubsection*{KDE (Kernel Density Estimation)}
+\begin{lstlisting}[language=Python]
+sns.kdeplot(data_to_be_plotted, fill=True, bw_adjust= value, cumulative=True)
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|sns.kdeplot(data_to_be_plotted, fill=True, bw_adjust=value, cumulative=True|:  
+  \begin{itemize}
+  \item \texttt{sns.kdeplot()}  for plotting KDE plot.
+  \item \texttt{fill} for filling the area under the curve.
+  \item \texttt{bw\_adjust} for changing the bandwidth of the plot.
+  \item \texttt{cumulative = True} for making the plot a cumulative distribution function instead of a probability density function.
+  \end{itemize}
+  \texttt{Note:} there are some changes in the parameters of this function. Visit \href{https://seaborn.pydata.org/generated/seaborn.kdeplot.html}{Seaborn KDE plot documentation} to see it and for more. 
+\end{itemize}
+
+
+
+\begin{figure}[H]
+\centering
+\caption{KDE Plots}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure5.PNG"}
+\caption{default KDE plot}
+\end{subfigure}
+\hfill
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure6.PNG"}
+\caption{Filled KDE plot}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure7.PNG"}
+\caption{KDE plot with a different bandwidth}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure8.PNG"}
+\caption{KDE plot as a cumulative distribution function}
+\end{subfigure}
+
+\end{figure}
+
+\subsection*{Bivariate KDEplot}
+
+\begin{lstlisting}[language=Python]
+sns.kdeplot(x=data_1, y=data_2,levels=value, fill=True, cbar=True)
+\end{lstlisting}
+
+\begin{itemize}
+\item \lstinline|sns.kdeplot(x=data_1, y=data_2,levels=value, fill=True, cbar=True)|:
+  \begin{itemize}
+  \item \texttt{sns.kdeplot(x=data\_1, y=data\_2)}  for plotting bivariate KDE plot.
+  \item \texttt{levels} for changing the number of levels in the plot.
+  \item \texttt{fill} for filling the plot.
+  \item \texttt{cbar = True} for adding a color bar for the filled plot.
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\caption{Bivariate KDE Plots}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure9.PNG"}
+\caption{Default bivariate KDE plot}
+\end{subfigure}
+\hfill
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure10.PNG"}
+\caption{Bivariate KDE plot with changing levels}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure11.PNG"}
+\caption{Filled bivariate KDE plot}
+\end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+\includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure12.PNG"}
+\caption{Bivariate KDE plot with color bar}
+\end{subfigure}
+\end{figure}
+
+\subsection*{Hist plot}
+
+\begin{lstlisting}[language=Python]
+sns.histplot(penguins.bill_length_mm)
+sns.histplot(x='bill_length_mm', data=penguins)
+sns.histplot(y='bill_length_mm', data=penguins)
+sns.histplot(x='bill_length_mm', data=penguins, kde=True)
+sns.histplot(x='bill_length_mm', data=penguins, bins=20)
+sns.histplot(x='bill_length_mm', data=penguins, binwidth=10)
+sns.histplot(x='bill_length_mm', data=penguins, binrange=(30, 60))
+sns.histplot(x='bill_length_mm', data=penguins, stat='density')
+sns.histplot(x='bill_length_mm', data=penguins, stat='probability', cumulative=True)
+sns.histplot(x='bill_length_mm', data=penguins, hue='species')
+sns.histplot(x='bill_length_mm', data=penguins, hue='species', element = 'poly')
+\end{lstlisting}
+
+
+\begin{itemize}
+    \item \texttt{For more about Hist plot  visit  \href{https://seaborn.pydata.org/generated/seaborn.histplot.html}{Seaborn Hist plot documentation}}
+\end{itemize}
+
+\begin{itemize}
+  \item \lstinline|sns.histplot(penguins.bill_length_mm) sns.histplot(x='bill_length_mm', data=penguins)| 
+  \item \lstinline| sns.histplot(x='bill_length_mm', data=penguins)| : Both for plotting a histogram and visit \href{https://seaborn.pydata.org/generated/seaborn.histplot.html}{Seaborn Hist plot documentation} for more.
+  \item \lstinline| sns.histplot(y='bill_length_mm', data=penguins)| : for plotting a horizontal histogram.
+  \item \lstinline|sns.histplot(x='bill_length_mm', data=penguins,kde=True, bins=value, binwidth=value, binrange=(value_1, value_2))|:
+  \begin{itemize}
+    \item \texttt{kde=True} for adding a KDE plot.
+    \item \texttt{bins = value} dividing the histogram into a desired number of bins.
+    \item \texttt{binwidth = value} choosing a specific bandwidth for the bin in the plot.
+    \item \texttt{binrange = (value1, value2)} dividing the histogram bins with a specific range.
+    \item \texttt{stat ='density', stat = 'probability'} for making the values on y a density representation or a probability representation, and see the documentation at the top for more.
+    \item \texttt{cumulative = True} represent a cumulative function.
+    \item \texttt{hue = ' '} splits the data sent by the hue column and colors each different species by a color.
+   \item \texttt{element = ' '} Visual representation of the histogram statistic.
+  \end{itemize}
+\end{itemize}
+
+
+
+
+\begin{figure}[H]
+  \centering
+  \caption{Histogram Plots – Part 1}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure13.PNG"}
+    \caption{Default Histogram plot}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure14.PNG"}
+    \caption{Horizontal Histogram plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure15.PNG"}
+    \caption{Histogram plot with KDE plot}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure16.PNG"}
+    \caption{Histogram plot with 20 bins}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure17.PNG"}
+    \caption{Histogram plot with a specific bandwidth (10)}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure18.PNG"}
+    \caption{Histogram plot with a specific binrange (30, 60)}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \caption{Histogram Plots – Part 2}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure19.PNG"}
+    \caption{Histogram plot with a density representation}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure20.PNG"}
+    \caption{Histogram plot with a probability representation}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure21.PNG"}
+    \caption{Histogram plot with a probability cumulative representation}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure22.PNG"}
+    \caption{Histogram plot with the hue}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure23.PNG"}
+    \caption{Histogram visual representation using poly}
+  \end{subfigure}
+\end{figure}
+
+
+
+
+
+
+
+\subsection*{ECDF plot} 
+\subsubsection*{ECDF (Empirical Cumulative Distribution Function)}
+
+\begin{itemize}
+    \item \texttt{For more about ECDF plot  visit \href{https://seaborn.pydata.org/generated/seaborn.ecdfplot.html}{Seaborn ECDF plot documentation}}
+  \end{itemize}
+
+\begin{itemize}
+  \item \texttt{\textcolor{green!70!black}{Advantage}}
+  \begin{itemize}
+    \item \texttt{No binning or smoothing}
+    \item \texttt{Compare Category distribution is easy} 
+  \end{itemize}
+\item \texttt{\textcolor{red!70!black}{Dis Advantage}}
+ \begin{itemize}
+    \item \texttt{Hard to see Central Tendecies}
+    \item \texttt{Hard to detect as we have a Bimodal distribution} 
+  \end{itemize}
+\end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+# For plotting an ECDF plot
+sns.ecdfplot(x='tip', data=tips); 
+
+#Using hue to split the plot
+sns.ecdfplot(x='tip', data=tips, hue = 'day');
+
+#Using state for changing the y representation.
+sns.ecdfplot(x='tip', data=tips,stat = 'count', hue = 'day');
+
+#Using lw for styling (changing line width)
+sns.ecdfplot(x='tip', data =tips,hue='day', lw = 3);
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\centering
+\caption{ECDF plots}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure24.PNG"}
+    \caption{Default ECDF plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure25.PNG"}
+    \caption{ECDF plot using hue}
+  \end{subfigure}
+ \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure26.PNG"}
+    \caption{ECDF plot using stat and hue}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure27.PNG"}
+    \caption{ECDF plot with a styled line width}
+  \end{subfigure}
+\end{figure}
+
+
+
+\subsection*{Box plot} 
+\begin{itemize}
+    \item \texttt{Seaborn classifies the box plot as a categorical distribution plot}
+    \item \texttt{For more about Box plot  visit \href{https://seaborn.pydata.org/generated/seaborn.boxplot.html}{Seaborn Box plot documentation}} 
+    \item \texttt{\texttt{Note:} you can find some styling that isn't mentioned in the Seaborn documentation, but it is in the Matplotlib documentation, so visit \href{https://matplotlib.org/stable/index.html}{Matplotlib documentation}}
+  \end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+# For plotting a  Box plot
+# (for a horizontal Box plot reverse the x and y and the reverse is true)
+sns.boxplot(x= cars.mpg) 
+sns.boxplot(x= cars.origin,y = cars.mpg)
+sns.boxplot(x= 'origin' ,y='mpg', data = cars)
+sns.boxplot(y='origin', x='mpg', data=cars)
+
+
+# For plotting a vertical Box plot 
+sns.boxplot(cars.mpg)        
+sns.boxplot(y=cars.mpg)    
+
+
+# Using hue to split the plot
+sns.boxplot(x= 'origin' ,y='mpg', hue='cylinder', data = cars)
+
+
+# Using some styling
+sns.boxplot(x='mpg', y='origin', data=cars,hue='newer_model', linewidth=2.5, fliersize=5)
+
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\centering
+\caption{Box plots}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure28.PNG"}
+    \caption{Default Box plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure29.PNG"}
+    \caption{Vertical Box plot with x and y data}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure30.PNG"}
+    \caption{Horizontal Box plot with x and y data}
+  \end{subfigure}
+ \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure31.PNG"}
+    \caption{Box plot using hue to split data}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure32.PNG"}
+    \caption{Box plot with a bigger fliersize and linewidth}
+  \end{subfigure}
+\end{figure}
+
+
+
+
+
+
+
+
+
+\subsection*{Violin plot} 
+\begin{itemize}
+    \item \texttt{Seaborn classifies the box plot as a categorical distribution plot}
+    \item \texttt{For more about Box plot  visit \href{https://seaborn.pydata.org/generated/seaborn.boxplot.html}{Seaborn Box plot documentation}} 
+    \item \texttt{\texttt{Note:} you can find some styling that isn't mentioned in the Seaborn documentation, but it is in the Matplotlib documentation, so visit \href{https://matplotlib.org/stable/index.html}{Matplotlib documentation}}
+  \end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+# For plotting a  Violin plot
+sns.violinplot(cars.displacement)
+sns.violinplot(x=cars.cylinders, y=cars.displacement);
+sns.violinplot(x='cylinders', y='displacement',data=cars)
+
+
+# For plotting a Horizontal Violin plot 
+sns.violinplot(x = cars.displacement)
+ 
+
+# Using hue to split the plot
+sns.violinplot(x='cylinders', y='displacement', hue='origin', data=cars);
+
+
+# Using split to split the violin plot into parts for each category in the x variable.
+sns.violinplot(x='cylinders', y='displacement', hue='origin', data=cars[cars.origin.isin(['japan', 'europe'])], split=True)
+
+# Using some styling
+sns.boxplot(x='mpg', y='origin', data=cars,hue='newer_model', linewidth=2.5, fliersize=5)
+
+
+#changing the inner part of the violin plot
+sns.violinplot(x='cylinders', y='displacement', hue='origin', data=cars[cars.origin.isin(['japan', 'europe'])], split=True, inner='quartiles')
+
+
+# Using some styling like changing the bandwidth
+sns.violinplot(x=cars.cylinders, y=cars.displacement, bw_method =0.2);
+
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\centering
+\caption{Violin plots}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure33.PNG"}
+    \caption{Default Violin plot}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure34.PNG"}
+    \caption{Horizontal Violin plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure35.PNG"}
+    \caption{Vertical Violin plot with x and y data}
+  \end{subfigure}
+ \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure36.PNG"}
+    \caption{Violin plot using hue to split data}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure37.PNG"}
+    \caption{Violin plot using split}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure38.PNG"}
+    \caption{Violin plot with changed inner part}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure39.PNG"}
+    \caption{Violin plot with changed bandwidth}
+  \end{subfigure}
+\end{figure}
+
+
+
+\subsection*{Swarm plot} 
+\begin{itemize}
+    \item \texttt{In Swarm plot, there is no overlap}
+    \item \texttt{For more about Swarm plot  visit \href{https://seaborn.pydata.org/generated/seaborn.swarmplot.html}{Seaborn Swarm plot documentation}} 
+  \end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+# For plotting a  Swarm plot
+# (For a horizontal Box plot reverse the x and y and the reverse is true)
+swarmplot(cars.horsepower);
+sns.swarmplot(x=cars.origin, y=cars.horsepower)
+sns.swarmplot(x='origin', y='horsepower', data=cars)
+
+# For plotting a Horizontal Swarm plot 
+sns.swarmplot(x=cars.horsepower)
+ 
+
+# Using hue to split the Swarm plot
+sns.swarmplot(x='origin', y='horsepower', hue='cylinders', data=cars)
+
+
+# Using  dodge to  split the Swarm plot data horizontally
+sns.swarmplot(x='origin', y='horsepower', hue='cylinders', data=cars, dodge=True)
+
+# Changing Swarm plot marker
+sns.swarmplot(cars.horsepower, marker= 'X')
+
+
+# Plotting a swam plot and a Box plot 
+sns.boxplot(x=usa.cylinders, y=usa.horsepower)
+sns.swarmplot(x=usa.cylinders, y=usa.horsepower)
+
+
+# Plotting a Swarm plot and a Violin plot 
+sns.violinplot(x=usa.cylinders, y=usa.horsepower)
+sns.swarmplot(x=usa.cylinders, y=usa.horsepower)
+
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\centering
+\caption{Swarm plots – Part 1}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure40.PNG"}
+    \caption{Default Swarm plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure41.PNG"}
+    \caption{Horizontal Swarm plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure42.PNG"}
+    \caption{Vertical Swarm plot with x and y data}
+  \end{subfigure}
+ \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure43.PNG"}
+    \caption{Swarm plot using hue to split data}
+  \end{subfigure}
+\end{figure}
+\begin{figure}[H]
+\centering
+\caption{Swarm plots  – Part 2}
+
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure44.PNG"}
+    \caption{Swarm plot using dodge to split data horizontally}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure45.PNG"}
+    \caption{Swarm plot with Box plot}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure46.PNG"}
+    \caption{Swarm plot with Violin plot}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure47.PNG"}
+    \caption{Swarm plot with an X marker}
+  \end{subfigure}
+\end{figure}
+
+
+
+
+\subsection*{Strip plot} 
+\begin{itemize}
+    \item \texttt{For more about Strip plot  visit \href{https://seaborn.pydata.org/generated/seaborn.stripplot.html}{Seaborn Strip plot documentation}} 
+  \end{itemize}
+
+
+\begin{lstlisting}[language=Python]
+# For plotting a  Strip plot
+sns.stripplot(cars.weight)
+sns.stripplot(x=cars.weight, y=cars.origin)
+sns.stripplot(x='weight',y='origin', data=cars)
+
+
+# For plotting a Horizontal Strip plot 
+sns.stripplot(x=cars.weight)
+ 
+
+# Using hue to split the Strip plot
+sns.stripplot(x ='weight', y='origin', hue='cylinders', data=cars)
+
+
+# Using  dodge to  split the Strip plot data horizontally
+sns.stripplot(x ='weight', y='origin', hue='cylinders', data=cars, dodge=True)
+
+
+# Changing spread using jitter
+sns.stripplot(x=cars.weight, y=cars.origin,data=cars, hue='cylinders', jitter=.25);
+
+
+# Changing markers and size of markers
+sns.stripplot(x=cars.weight, y=cars.origin,data=cars, hue='cylinders', marker='*', size=7)   
+
+
+# Changing the transparency of the markers 
+sns.stripplot(x=cars.weight, y=cars.origin,data=cars, hue='cylinders', size =7, alpha=0.25)
+
+
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\centering
+\caption{Strip plots – Part 1}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure48.PNG"}
+    \caption{Default Strip plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure49.PNG"}
+    \caption{Horizontal Strip plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure50.PNG"}
+    \caption{Strip plot with x and y data}
+  \end{subfigure}
+ \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure51.PNG"}
+    \caption{Strip plot using hue to split data}
+  \end{subfigure}
+\end{figure}
+\begin{figure}[H]
+\centering
+\caption{Strip plots – Part 2}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure52.PNG"}
+    \caption{Strip plot using dodge to split data horizontally}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure53.PNG"}
+    \caption{Strip plot using jitter}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure54.PNG"}
+    \caption{Strip plot with different markers and marker sizes}
+  \end{subfigure}
+\begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure55.PNG"}
+    \caption{Strip plot with alpha}
+  \end{subfigure}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\subsection*{Scatter plot} 
+
+\begin{itemize}
+   \item \texttt{Scatter plot is considered a rational plot}
+    \item \texttt{For more about Scatter plot  visit \href{https://seaborn.pydata.org/generated/seaborn.scatterplot.html}{Seaborn Scatter plot documentation}} 
+  \end{itemize}
+
+\begin{lstlisting}[language=Python]
+# For plotting a  Scatter plot
+sns.scatterplot(x=diamonds.carat, y=diamonds.price)
+sns.scatterplot(x='carat', y='price', data=diamonds)
+
+
+# Using hue to split the Scatter plot
+sns.scatterplot(x='carat', y='price', hue='cut', data=diamonds)
+sns.scatterplot(x='carat', y='price', hue='depth', data=diamonds)
+
+# Using  palette to  pass a specific color to the markers
+sns.scatterplot(x='carat', y='price', hue='cut', data=diamonds, palette=['purple', '#55CCCC'])
+
+
+# Using sizes to split the data  using marker size
+sns.scatterplot(x='carat', y='price', size='cut', data=diamonds, sizes=[150, 50])
+sns.scatterplot(x='carat', y='price', size='cut', data=diamonds, sizes=[150, 50])
+
+
+# Using style and sizes to change markers and the size of markers
+sns.scatterplot(x='carat', y='price', hue='cut', style='color', size='depth', data=diamonds)
+
+
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\centering
+\caption{Scatter plots}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure56.PNG"}
+    \caption{Default Scatter plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure57.PNG"}
+    \caption{Scatter plot using hue(cut) to Split data}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure58.PNG"}
+    \caption{Scatter plot using hue(depth) to Split data}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure59.PNG"}
+    \caption{Scatter plot with colors we made}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure60.PNG"}
+    \caption{Scatter plot using sizes to Split data by marker size}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure61.PNG"}
+    \caption{Scatter plot with splitted data by marker and size}
+  \end{subfigure}
+\end{figure}
+
+
+
+
+
+
+
+\subsection*{Line plot} 
+\begin{itemize}
+    \item \texttt{For more about Line plot  visit \href{https://seaborn.pydata.org/generated/seaborn.lineplot.html}{Seaborn Line plot documentation}} 
+  \end{itemize}
+
+\begin{lstlisting}[language=Python]
+# For plotting a  Line plot
+sns.lineplot(x=park.Day, y=park.Occupancy)
+sns.lineplot(x='Day', y='Occupancy', data=park)
+
+
+# Using n_boot to control the number of bootstrap  resamples to estimate uncertainty
+sns.lineplot(x='Day', y='Occupancy', data=park, n_boot=1000)
+
+
+# Using  ci to  change the confidence interval level for the line plot 
+sns.lineplot(x='Day', y='Occupancy', data=park, errorbar=('ci',70))
+
+
+# Using an estimator changes the aggregate function for the data we want to visualize, without modifying the plot itself
+sns.lineplot(x='Day', y='Occupancy', data=park, estimator='std')
+
+
+# Using hue and style to split and change the style of the data
+sns.lineplot(x='Day', y='Occupancy', data=park, hue="Location", style='Location')
+
+
+
+\end{lstlisting}
+
+\begin{itemize}
+  \item {\textbf{Note:}} To turn off the bootstrapped confidence intervals, set \texttt{ci=None} to trigger early exit within Seaborn code. A conditional checks for this case and completely bypasses the bootstrapping procedure if \texttt{ci} is set to \texttt{None}. This saves time if confidence intervals are not needed!
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\caption{Line plots}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure62.PNG"}
+    \caption{Default Line plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure63.PNG"}
+    \caption{Line plot with changing the number of bootstrap}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure64.PNG"}
+    \caption{Line plot using ci to change confidence interval}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure65.PNG"}
+    \caption{Line plot using estimator to make the aggregate function(std)}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure66.PNG"}
+    \caption{Line plot using hue and style to Split and style data}
+  \end{subfigure}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\subsection*{Regression plot} 
+\begin{itemize}
+    \item \texttt{For more about Line plot  visit \href{https://seaborn.pydata.org/generated/seaborn.regplot.html}{Seaborn Regression plot documentation}} 
+  \end{itemize}
+
+\begin{lstlisting}[language=Python]
+# For plotting a  Reg plot
+sns.regplot(x=diamonds.carat, y=diamonds.price)
+sns.lineplotsns.regplot(x='carat', y='price', data=diamonds)
+
+
+
+# Using fit_reg to remove the line and confidence interval
+sns.regplot(x='carat', y='price', data=diamonds, fit_reg=False)
+
+
+# Using  scatter to  remove scatter points 
+sns.regplot(x='carat', y='price', data=diamonds, scatter=False)
+
+
+# Using  ci to  change the confidence interval level for the line plot  from (None, 100)
+sns.regplot(x='carat', y='price', data=diamonds,ci = 70)
+
+
+# Changing spread using  x_jitter
+sns.regplot(x='cut_value', y='price', data=diamonds, x_jitter=.02)
+
+
+#Using x_estimator for applying an aggregation function to the x-values before fitting the regression line
+sns.regplot(x='cut_value', y='price', data=diamonds, x_estimator=np.mean)
+
+
+#Using order to change the order of values fit a polynomial regression instead of a simple straight line (linear regression)
+sns.regplot(x='carat', y='price', data=diamonds, order=2)
+
+#Styling, for example, changing the line style, color, and width
+sns.regplot(x='carat', y='price', data=diamonds, ci=None, line_kws={'lw': 4, 'color': 'black', 'linestyle': '-.'})
+
+
+\end{lstlisting}
+
+\begin{itemize}
+  \item \textbf{Note:} The \texttt{regplot} function allows customization using various parameters:
+  \begin{itemize}
+    \item \texttt{order}: Controls the polynomial degree for fitting non-linear regression curves. For example, \texttt{order=2} fits a quadratic regression curve.
+    \begin{lstlisting}
+    sns.regplot(x='carat', y='price', data=diamonds, order=2)
+    \end{lstlisting}
+    \item \texttt{robust}: Applies robust regression, making the model more resistant to outliers, thus reducing the influence of extreme values on the fit.
+    \begin{lstlisting}
+    sns.regplot(x='carat', y='price', data=diamonds, robust=True)
+    \end{lstlisting}
+    \item \texttt{logistic}: Fits a logistic regression (sigmoid curve), useful for binary outcome variables.
+    \begin{lstlisting}
+    sns.regplot(x='carat', y='price', data=diamonds, logistic=True)
+    \end{lstlisting}
+    \item \texttt{lowess}: Applies locally weighted scatterplot smoothing (LOESS), fitting a smooth curve to the data without assuming a global functional form.
+    \begin{lstlisting}
+    sns.regplot(x='carat', y='price', data=diamonds, lowess=True)
+    \end{lstlisting}
+  \end{itemize}
+\end{itemize}
+
+
+
+\begin{figure}[H]
+\centering
+\caption{Regression plots – Part 1}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure67.PNG"}
+    \caption{Default Reg plot}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure68.PNG"}
+    \caption{Reg plot without the line and the ci}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure69.PNG"}
+    \caption{Reg plot without the scatter points}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure70.PNG"}
+    \caption{Reg plot without the changed ci}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure71.PNG"}
+    \caption{Reg plot using x\_jitter to chage spread}
+  \end{subfigure}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\caption{Regression plots – Part 2}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure72.PNG"}
+    \caption{Reg plot using x\_estimator for appling mean }
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure73.PNG"}
+    \caption{Reg plot with a polynomial regression}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=1\textwidth]{"C:/LaTex/Seaborn/Seaborn\_photos/figure74.PNG"}
+    \caption{Reg plot with changed line}
+  \end{subfigure}
+\end{figure}
+
+
+
+
+
+
+
+
+
+\subsection*{Conclusion}
+At the end, this was a fast summary for the \texttt{Seaborn Library} by me,\\ and if it was useful, don't forget to pray for me \texttt{and for all our brothers in Palestine and Sudan}. And thank you :).
+
+\center{\textcopyright 2025 Ahmed\_Ads \\}
+
+\noindent\hrulefill % Adds a horizontal line
+\vspace{1em} % Adds vertical space
+
+\end{document}
+
